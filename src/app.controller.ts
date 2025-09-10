@@ -1,12 +1,10 @@
+// src/app.controller.ts
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
 
-@Controller()
+@Controller()   // 👈 root path
 export class AppController {
-  constructor(private readonly appService: AppService) {}
-
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  getHealth(): string {
+    return 'SmartHive Device Management Service is running 🚀';
   }
 }
