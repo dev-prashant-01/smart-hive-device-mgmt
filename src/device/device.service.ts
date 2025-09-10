@@ -1,25 +1,20 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { Device } from "./device.model";
 import { v4 as uuidv4 } from 'uuid';
+import { CreateDeviceDTO } from "./dto/create-device.dto";
 
 @Injectable()
 export class DeviceService {
     private devices: Device[] = [];
     private idCounter = 1;
 
-    create(deviceData: Partial<Device>): Device {
-        if (!deviceData.name) {
-            throw new Error("Device name is required");
-        }
-        if (!deviceData.type) {
-            throw new Error("Device type is required");
-        }
+    create(createDeviceDTO: CreateDeviceDTO): Device {
         const newDevice: Device = {
             id: this.idCounter++,
-            name: deviceData.name,
-            type: deviceData.type,
-            model: deviceData.model || '',
-            location: deviceData.location || '',
+            name: createDeviceDTO.name,
+            type: createDeviceDTO.type,
+            model: createDeviceDTO.model,
+            location: createDeviceDTO.location,
             status: 'offline',
             apikey: uuidv4(),
             createAt: new Date(),

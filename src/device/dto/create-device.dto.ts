@@ -1,11 +1,12 @@
-import { IsEnum, IsOptional, IsString } from "class-validator";
+import { IsEnum, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
 export class CreateDeviceDTO {
     @IsString()
+    @IsNotEmpty()
     name: string;
 
     @IsEnum(['sensor','actuator','gateway'])
-    type: string;
+    type: 'sensor' | 'actuator' | 'gateway';
 
     @IsOptional()
     @IsString()
